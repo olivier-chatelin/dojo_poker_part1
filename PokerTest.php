@@ -16,5 +16,6 @@ class PokerTest extends TestCase
         $this->assertEquals('Four of a kind',$poker->retrieveCombinaison([['A','H'],['A','C'],['A','S'],['A','D'],['10','S']]));
         $this->assertEquals('Two pairs',$poker->retrieveCombinaison([['A','H'],['A','C'],['3','S'],['3','D'],['10','S']]));
         $this->assertEquals('Full house',$poker->retrieveCombinaison([['A','H'],['A','C'],['3','S'],['3','D'],['3','S']]));
+        $this->assertEquals('Full house',$poker->retrieveCombinaison([['A','H'],['A','C'],['A','S'],['3','D'],['3','S']]));
     }
 }
