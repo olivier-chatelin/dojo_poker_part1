@@ -23,17 +23,9 @@ class Poker
     {
         $result = 'High card';
         $values = [];
-        $colors = [];
         foreach ($cards as $card) {
             $values[] = $card[0];
-            $colors[] = $card[1];
         }
-        usort($values, function($a,$b) {
-            if(self::ORDER_VALUES[$a] === self::ORDER_VALUES[$b]) {
-                return 0;
-            }
-            return self::ORDER_VALUES[$a] < self::ORDER_VALUES[$b]? -1 : 1;
-        });
         $countValues = array_count_values($values);
         foreach ($countValues as $count) {
             switch ($count) {
@@ -57,30 +49,6 @@ class Poker
                     break;
             }
         }
-        $countColors = array_count_values($colors);
-        if(in_array(count($colors),$countColors)) {
-            $result = 'Flush';
-        }
-        $countSuite = 0;
-        for($i = 0; $i < count($values) - 1; $i++) {
-            if(self::ORDER_VALUES[$values[$i+1]] - self::ORDER_VALUES[$values[$i]] === 1) {
-                $countSuite++;
-            }
-        }
-         if($countSuite === 4){
-             if($result === 'Flush') {
-                 $result = 'Straight flush';
-             } else {
-                $result = 'Straight';
-             }
-         }
-         if($countSuite === 3 && (self::ORDER_VALUES[$values[count($values) - 1]] - self::ORDER_VALUES[$values[0]]) === 12) {
-             if ($result === 'Flush') {
-                 $result = 'Royal flush';
-             } else {
-                $result = 'Straight';
-             }
-         }
         return $result;
     }
 }
